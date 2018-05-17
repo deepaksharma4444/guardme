@@ -199,9 +199,4 @@ class Transaction extends Model
         }
         return $return_data;
     }
-	
-	 public function job()
-    {
-        return $this->belongsTo(Job::class,'job_id');
-    }
 }
