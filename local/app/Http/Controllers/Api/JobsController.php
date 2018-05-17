@@ -389,6 +389,18 @@ class JobsController extends Controller
             'data' => $created_jobs->get()
         ]);
     }
+	
+	public function getPaidJobs()
+    {
+        $paid_jobs = Job::whereHas('transactions', function($query){
+            $query->where('credit_payment_status', 'paid');
+        })->get();
+
+        return response()->json([
+            'data' => $paid_jobs
+        ]);
+    }
+	
     /**
      * @return mixed
      */
