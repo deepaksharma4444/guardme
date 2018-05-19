@@ -505,6 +505,56 @@ INSERT INTO `shop` (`id`, `shop_name`, `address`, `city`, `pin_code`, `country`,
 (34, 'Seller Company', '5900 Timber Creek Lane, APT 1208', 'Indian Trail', '27612', 'United States', 'North Carolina', '08102977068', 'fghjkljhgvfhjk', '1,2,3,4', '15', '16', '', '', 'cokwedadi@gmail.com', 30, 'no', 'unapproved', '0', '20', '2'),
 (35, 'Yefta Shop', 'Zazazaza', 'Solo', '789797', 'Indonesia', 'Jawa Tengah', '0890790808080', 'Test', '1,2,3,4,5', '9', '19', '', '', 'yevtha.aw@gmail.com', 21, 'no', 'unapproved', '0', '30', '5');
 
+
+
+
+
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news_letters`
+--
+
+CREATE TABLE `news_letters` (
+  `id` int(50) NOT NULL,
+  `user_id` varchar(50) NOT NULL DEFAULT '',
+  `email` varchar(300) NOT NULL DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `news_letters`
+--
+
+INSERT INTO `news_letters` (`id`, `user_id`, `email`, `created_at`, `updated_at`) VALUES
+(3, '', 'djhf@jhj.dfdf', '2018-05-19 15:19:43', '2018-05-19 15:19:43'),
+(4, '22', 'indah@gmail.com', '2018-05-19 15:19:58', '2018-05-19 15:19:58');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `news_letters`
+--
+ALTER TABLE `news_letters`
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `news_letters`
+--
+ALTER TABLE `news_letters`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;COMMIT;
+
+
 -- --------------------------------------------------------
 
 --
