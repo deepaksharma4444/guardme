@@ -1,351 +1,281 @@
-<?php
+<?php 
 use Illuminate\Support\Facades\Route;
-$currentPaths= Route::getFacadeRoot()->current()->uri();
+$ncurrentPath= Route::getFacadeRoot()->current()->uri();
 $url = URL::to("/");
 $setid=1;
-$setts = DB::table('settings')
-    ->where('id', '=', $setid)
-    ->get();
+		$setts = DB::table('settings')
+		->where('id', '=', $setid)
+		->get();
 ?>
-        <!DOCTYPE html>
-<html lang="en">
-<head>
+<footer id="footer" class="clearfix">
+
+	<!-- footer-top -->
+	<section class="footer-top clearfix">
+		<div class="container">
+			<div class="row">
+				<!-- footer-widget -->
+				<div class="col-sm-3">
+					<div class="footer-widget">
+						<h3>Quik Links</h3>
+						<ul>
+							<li><a href="<?php echo $url;?>">Home</a></li>
+							<li><a href="<?php echo $url;?>/about">About Us</a></li>
+							<li><a href="<?php echo $url;?>/terms-conditions">Term & Conditions</a></li>
+							<li><a href="<?php echo $url;?>/privacy-policy">Privacy Policy</a></li>
+							<li><a href="<?php echo $url;?>/contact">Contact Us</a></li>
 
 
+		
+							
+						</ul>
+					</div>
+				</div><!-- footer-widget -->
 
-    @include('style')
+				<!-- footer-widget -->
+					<div class="col-sm-3">
+						<div class="footer-widget">
+							<h3>Customers</h3>
+							<ul>
+								<li><a href="<?php echo $url;?>/register">Signup </a></li>
+								<li><a href="<?php echo $url;?>/login">Login </a></li>
+								<li><a href="<?php echo $url;?>/how-it-works">How it works </a></li>
+								<li><a href="<?php echo $url;?>/safety">Safety </a></li>
+								<li><a href="<?php echo $url;?>/service-guide">Service Guide </a></li>
+								<li><a href="<?php echo $url;?>/how-to-pages">How To Pages </a></li>
+								<li><a href="<?php echo $url;?>/success-stories">Success stories </a></li>
+							</ul>
+						</div>
+					</div><!-- footer-widget -->
+				
+				<!-- footer-widget -->
+					<div class="col-sm-3">
+						<div class="footer-widget social-widget">
+							<h3>Follow us on</h3>
+							<ul>
+								<li><a href="<?php echo $setts[0]->site_facebook;?>" target="_blank"><i class="fa fa-facebook-official"></i>Facebook</a></li>
+								<li><a href="<?php echo $setts[0]->site_twitter;?>" target="_blank"><i class="fa fa-twitter-square"></i>Twitter</a></li>
+								<li><a href="<?php echo $setts[0]->site_gplus;?>" target="_blank"><i class="fa fa-google-plus-square"></i>Google+</a></li>
+								<li><a  href="<?php echo $setts[0]->site_pinterest;?>" target="_blank"><i class="fa fa-pinterest-square"></i>Pinterest</a></li>
+								<li><a  href="<?php echo $setts[0]->site_pinterest;?>" target="_blank"><i class="fa fa-instagram"></i>Instagram</a></li>
 
-    <style>
-.banner-job {
-
-    @if(!empty($setts[0]->site_banner))
-    background-image: url({{$url}}/local/images/settings/{{$setts[0]->site_banner}});
-    @else
-        background-image: url({{$url}}/img/banner.jpg);
-    @endif
-
-    
-}
-</style>
-
-<script >
-    
-    function set_loc(val)
-    {
-        //$('#loc_id').val(id);
-        $('#loc_val').val(val);
-    }
-    function set_cat(id,val)
-    {
-        $('#cat_id').val(id);
-        $('#cat_val').val(val);
-    }
-</script>
-
-</head>
-<body>
+								
+							</ul>
+						</div>
+					</div>
+					<!-- footer-widget -->
+					<div class="col-sm-3">
+						<div class="footer-widget news-letter">
+							<h3>Newsletter</h3>
+							<p>Jobs is Worldest leading Portal platform that brings!</p>
+							<!-- form -->
+							
+							
+						
+							{{ Form::open(array('url' => 'post_newsletters_subscription','method' => 'POST')) }}
+ 		                        <input type="email" class="form-control" name="email" placeholder="Your email id">
+								<button type="submit" class="btn btn-primary">Sign Up</button>
+                           {{ Form::close() }}
 
 
+							 		
+						</div>
+					</div><!-- footer-widget -->
+		</div>
+	</section>
 
-<!-- fixed navigation bar -->
 
-    @include('header')
+	<div class="footer-bottom clearfix text-center">
+			<div class="container">
+
+				<p><?php if($setts[0]->site_copyright!=""){?><?php echo $setts[0]->site_copyright; } else {?>&copy; <?php echo date('Y');?>. All Rights Reserved.<?php } ?></p>
+			</div>
+		</div><!-- footer-bottom -->
 
 
-<!-- slider -->
-
-<div class="banner-job">
+	  
         
-        <div class="container text-center color-grey">
-            <h1 class="title">Manned Security Freelance Marketplace.</h1>
-            <h3>Looking for security personnel in the UK?</h3>
-            <h4>Get access to thousands of vetted SIA security personnel.</h4>
-            <div class="banner-form">
-                <form method="POST" action="{{ route('post.find.jobs') }}" id="formID">
-                    {!! csrf_field() !!}
-                     <input type="text" class="form-control" placeholder="Type Keyword" name="keyword" value="">  
-                   <div class="dropdown category-dropdown language-dropdown">
-                        <a data-toggle="dropdown" href="#"><span class="change-text" >
-                        @if(old('loc_val')!=NULL)
-                                {{old('loc_val')}}
-                            @else
-                                {{'Location'}}
-                            @endif
-                        </span> <i class="fa fa-angle-down"></i></a>
-                        <ul class="dropdown-menu category-change language-change loc">
-                            @foreach($locs as $loc)
-                                <li><a href="#" onclick="set_loc('{{$loc->city_town}}')">{{$loc->city_town}}</a></li>
-                            @endforeach
-                        </ul>   
-                        
-                        <input type="hidden" name="loc_val" value="{{old('loc_val')}}" id="loc_val">                        
-                    </div><!-- category-change -->
-                    <button type="submit" class="btn btn-primary" value="Search">Search</button>
-                </form>
-            </div><!-- banner-form -->
-            
-           <!-- banner-socail -->
-        </div><!-- container -->
-    </div><!-- banner-section -->
+      </footer>
 
+   
+    <!-- add javascripts -->
+    
+	<?php if($ncurrentPath=="index" or $ncurrentPath=="/"){?>
 <script>
-    $(document).ready(function() {
-        src = "{{ route('searchajax') }}";
-        $("#search_text").autocomplete({
-            source: function(request, response) {
-                $.ajax({
-                    url: src,
-                    dataType: "json",
-                    data: {
-                        term : request.term
-                    },
-                    success: function(data) {
-                        response(data);
-
-                    }
-                });
-            },
-            minLength: 1,
-
-        });
+    $(document).ready(function(){
+      $(window).scroll(function() {
+      if($(window).width() > 1200 )
+	   {
+	  // check if scroll event happened
+        if ($(document).scrollTop() > 50) { // check if user scrolled more than 50 from top of the browser window
+          $(".navbar-fixed-top").css("background-color", "#F4F4F4");
+		   
+          $(".navbar-fixed-top li a").css("color","#000000");
+		  
+		  
+		  $(".navbar-fixed-top li.dropdown .open a").css("color","#000000");
+		  // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
+        } else {
+          $(".navbar-fixed-top").css("background-color", "transparent"); 
+		  
+		   $(".navbar-fixed-top li a").css("color","#ffffff");
+		   $(".navbar-fixed-top li.dropdown .open a").css("color","#000000");
+		  // if not, change it back to transparent
+        }
+		
+		
+		
+		}
+		
+      });
     });
 </script>
+	<?php } else  {?>
+	<script>
+    $(document).ready(function(){
+      $(window).scroll(function() {
+       if($(window).width() > 1200 )
+	   {
+	  // check if scroll event happened
+        if ($(document).scrollTop() > 50) { // check if user scrolled more than 50 from top of the browser window
+          $(".navbar-fixed-top").css("background-color", "#F4F4F4");
+          $(".navbar-fixed-top li a").css("color","#000000");
+		  // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
+        } else {
+          $(".navbar-fixed-top").css("background-color", "#ffffff"); 
+		   $(".navbar-fixed-top li a").css("color","#000000");
+		  // if not, change it back to transparent
+        }
+		}
+		
+      });
+    });
+</script>
+	<?php } ?>
+    <!-- Only used for Script Tutorial's Demo site. Please ignore and remove. -->
+  <script type="text/javascript">
+	$(document).ready(function() {
+  $('#media').carousel({
+    pause: true,
+    interval: false,
+  });
+});
 
 
 
 
+</script>
+	
+	
+	<script type="text/javascript" src="<?php echo $url;?>/js/jquery.flexisel.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://getaddress.io/js/jquery.getAddress-2.0.7.min.js"></script>
+	
+	
+	<script src="<?php echo $url;?>/js/jquery.multiselect.js"></script>
+	<script src="<?php echo $url;?>/js/date-time-picker/bootstrap-datetimepicker.min.js"></script>
+	<script src="<?php echo $url;?>/js/date-time-picker/bootstrap-datetimepicker.uk.js"></script>
+	<script src="<?php echo $url;?>/js/moment.js"></script>
+<script>
+	class Errors{
+		constructor() {
+			this.formErrors = {};
+		}
+		record(errors) {
+			this.formErrors = errors;
+		}
+		load() {
+			$(".error-span").addClass('hide');
+			$.each(this.formErrors, function(i, v) {
+				if (typeof $('.'+ i) != 'undefined') {
+					$('.'+ i).siblings('.error-span').html(v);
+					$('.'+ i).siblings('.error-span').removeClass('hide');
+				}
+			});
+			if (typeof $('.error-span:eq(0)').closest('.form-group') != 'undefined') {
+				if (typeof $('.error-span:visible:eq(0)').closest('.form-group').offset() != 'undefined')
+					var scrollPosition = $('.error-span:visible:eq(0)').closest('.form-group').offset().top - 70;
+				$("html, body").animate({ scrollTop: scrollPosition }, 1000);
+			}
+		}
+	}
+$('#langOpt').multiselect({
+    columns: 1,
+    placeholder: 'Select Services'
+});
+var pgsVal = 0;
+$( ".trackprogress" ).each(function(i, obj) {
+    if($(this).val().length >0){
+        pgsVal += 4;
+    }
+});
+console.log(pgsVal);
+$( "#progressbar" ).progressbar({
+    value: pgsVal,
+    create: function(event, ui) {$(this).find('.ui-widget-header').css({'background-color':'#5cb85c'})}
+});
+$('.trackprogress').change(function() {
+    var pbVal = 0;
+    $( ".trackprogress" ).each(function(i, obj) {
+        if($(this).val().length >0){
+            pbVal += 4;
+        }
+    });
+    $( "#progressbar" ).progressbar( "option", "value", pbVal );
+    return false; 
+});
+$('#postcode_lookup').getAddress({
+    api_key: 'ZTIFqMuvyUy017Bek8SvsA12209',
+    input_id : 'address_id',
+    input_name : 'address_id',
+    input_class :'form-control validate[required]',
+    button_class : 'btn',
+    dropdown_class:'form-control',
+    <!--  Or use your own endpoint - api_endpoint:https://your-web-site.com/getAddress, -->
+    output_fields:{
+        line_1: '#line1',
+        line_2: '#line2',
+        line_3: '#line3',
+        post_town: '#town',
+        county: '#county',
+        postcode: '#postcode'
+    },
+<!--  Optionally register callbacks at specific stages -->                                                                                                               
+    onLookupSuccess: function(data){/* Your custom code */
+        console.log(data);
+        $('#addresslat').val(data.latitude);
+        $('#addresslong').val(data.longitude);
+        $('#country').val('UK');
+    },
+    onLookupError: function(){/* Your custom code */},
+    onAddressSelected: function(elem,index){/* Your custom code */}
+});
+$("select#nationality").change(function(){    
+    $( "select#nationality option:selected").each(function(){        
+        if($(this).attr("value")=="229"){
+            $("#visa_no_field").hide();
+            $("#niutr_no_field").show();
+        } else {
+            $("#visa_no_field").show();
+            $("#niutr_no_field").hide();
+        }
+    });
+}).change();
+$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
+});
+jQuery('.date-time-picker').datetimepicker({
+	//language:  'uk',
+	weekStart: 1,
+	todayBtn:  1,
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 2,
+	forceParse: 0,
+	showMeridian: 1,
+	minuteStep: 5
+});
+</script>
 
-
-
-<div class="ashbg">
-
-    <div class="clearfix"></div>
-
-
-    <div class="clearfix"></div>
-
-</div>
-
-<div class="clearfix"></div> 
-
-<div class="page">
-    <div class="container">
-    <div class="works section job-category-items">
-            
-            <div class="col-md-12" align="center"><h1>How it works</h1></div>
-            <div class="height30"></div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-10">
-                        <div class="col-md-6">
-                            <img src="img/how-it-works.png" class="img-responsive" alt="">
-                        </div>
-
-                        <div class="col-md-6">
-                            <h3 class="">1. Tell us what you need</h3>
-                            <p class="">First, select required professional service about what type of pro you’re looking for.</p>
-                            <h3 class="">2. Review service providers</h3>
-                            <p class="">Within seconds, you’ll receive expert service providers profile with their ratings. choose one among them.</p>
-                            <h3 class="">3. Hire the right pro</h3>
-                            <p class="">Compare prices, profiles, and reviews, then hire the pro that’s right for you.</p>
-
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-
-                </div>
-
-            </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="clearfix"></div>
-
-    <div class="section workshop-traning">
-        <div class="section-title">
-            <h4>Customers use to get millions of projects done quickly and easily</h4>
-            <a href="#" class="btn btn-primary">See all</a> 
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-               <!--  <div class="col-md-1"></div> -->
-                <div class="nopadding testimons">
-                    <div id="flexiselDemotesti">
-                        <?php foreach($testimonials as $testimonial){?>
-                        <li>
-                            <div class="weightbg">
-                                <div class="innerbg">
-                                    <p><?php echo $testimonial->description;?></p>
-                                </div>
-                                <div class="user">
-                                    <?php
-                                    $testimonialphoto="/testimonialphoto/";
-                                    $path ='/local/images'.$testimonialphoto.$testimonial->image;
-                                    if($testimonial->image!=""){
-                                    ?>
-                                    <img src="<?php echo $url.$path;?>" class="img-responsive" alt="">
-                                    <?php } else {?>
-                                    <img src="<?php echo $url.'/local/images/nophoto.jpg';?>"  class="img-responsive">
-                                    <?php } ?>
-                                    <div class="user-txt">
-
-                                        <h5><?php echo $testimonial->name;?></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
-        </div>
-    </div><!-- workshop-traning -->
-
-    <div class="section video workshop-traning">
-         
-         <div class="section-title">
-            <h4>Check out these recent posts from our blog...</h4>
-           
-        </div>
-             <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-1"></div>
-                
-                
-              <div class="col-md-10">
-              
-              
-              @foreach($posts as $key=>$post)
-              
-                 @if($key==0)
-                  <a href="{{ $post['link'] }}" >
-                    <div class="col-md-8 paddingoff">
-                        <img src="{!! $post['image'] !!}" class="img-responsive big firstsize" alt="">
-                        <div class="titlesection">
-                            <h3>{!! $post['title'] !!}</h3>
-                            <span>{!! $post['category'] !!}</span>
-                        </div>
-
-                    </div>
-                    </a>
-                      <div class="height10 visible-xs "></div>
-                    
-                @endif    
-                  
-                @if($key==1)
-                   <div class="col-md-4 paddingoff left10">
-                     <a href="{{ $post['link'] }}" >
-                        <div class="justmove col-md-12 paddingoff"><img src="{!! $post['image'] !!}" class="img-responsive" alt="">
-                            <div class="titlesection">
-                                <h3>{!! $post['title'] !!}</h3>
-                                <span>{!! $post['category'] !!}</span>
-                            </div>
-                            
-                        </div>
-                      </a>          
-                @endif   
-                
-                @if($key==2)
-                      <div class="height10 hidden-md"></div>
-                        <a href="{{ $post['link'] }}" >
-                            <div class="justmove col-md-12 paddingoff"><img src="{!! $post['image'] !!}" class="img-responsive" alt="">
-                                <div class="titlesection">
-                                    <h3>{!! $post['title'] !!}</h3>
-                                    <span>{!! $post['category'] !!}</span>
-                                </div>
-                            </div>
-                        </a>  
-                   </div> 
-                @endif
-                  
-                    
-                    
-                    
-                    
-                    
-             @endforeach       
-                    
-              </div>
-                    
-
-                   
-            </div>
-        </div>
-                    
-
-                   
-            </div>
-        </div>
-    </div>
-
-    </div>
-</div>
-<div class="clearfix"></div>
-
-
-
-
-
-
-
-
-
-
-<div class="video">
-    <div class="clearfix"></div>
-   
-</div>
-
-
-<!-- download -->
-    <section id="download" class="clearfix parallax-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <h2>Download on App Store</h2>
-                </div>
-            </div><!-- row -->
-
-            <!-- row -->
-            <div class="row">
-                <!-- download-app -->
-                <div class="col-sm-4">
-                    <a href="#" class="download-app">
-                        <img src="images/icon/16.png" alt="Image" class="img-responsive">
-                        <span class="pull-left">
-                            <span>available on</span>
-                            <strong>Google Play</strong>
-                        </span>
-                    </a>
-                </div><!-- download-app -->
-
-                <!-- download-app -->
-                <div class="col-sm-4">
-                    <a href="#" class="download-app">
-                        <img src="images/icon/17.png" alt="Image" class="img-responsive">
-                        <span class="pull-left">
-                            <span>available on</span>
-                            <strong>App Store</strong>
-                        </span>
-                    </a>
-                </div><!-- download-app -->
-
-                <!-- download-app -->
-                <div class="col-sm-4">
-                    <a href="#" class="download-app">
-                        <img src="images/icon/18.png" alt="Image" class="img-responsive">
-                        <span class="pull-left">
-                            <span>available on</span>
-                            <strong>Windows Store</strong>
-                        </span>
-                    </a>
-                </div><!-- download-app -->
-            </div><!-- row -->
-        </div><!-- contaioner -->
-    </section><!-- download -->
-
-
-@include('footer')
-</body>
-</html>
+	<?php /* ?><script src="{{ asset('js/app.js') }}"></script><?php */?>
