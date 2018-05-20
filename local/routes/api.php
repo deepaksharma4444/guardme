@@ -76,12 +76,6 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function(){
     Route::post('/find-jobs','JobsController@findJobs')->name('api.find.jobs');
     Route::post('/job-details','JobsController@jobDetailsLocation')->name('api.job.details');
     Route::post('/search','SearchController@getpersonnelsearch');
-	
-	Route::post('/get_notifications_settings','JobsController@get_notifications_settings');
-	Route::post('/update_notifications_settings','JobsController@update_notifications_settings');
-	Route::post('/get_notifications','JobsController@get_notifications');
-	
-	
 });
 
 
