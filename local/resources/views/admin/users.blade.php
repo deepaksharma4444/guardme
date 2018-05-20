@@ -93,7 +93,6 @@ div.dataTables_wrapper div.dataTables_filter input{
                           <th>Email</th>
 						  <th>Phone</th>
                           <th>User Type</th>
-			  <th>NewsLetters Subscribed ?</th>
                           <th>Action</th>
 
                         </tr>
@@ -119,15 +118,6 @@ div.dataTables_wrapper div.dataTables_filter input{
                           <td><?php echo $user->email;?></td>
 						  <td><?php echo $user->phone;?></td>
 						  <td><?php echo $viewst;?></td>
-						  
-						    	  <td><?php $newsletter_subscribed =  @Responsive\NewsLetters::where('email',$user->email)->count();
-						  if($newsletter_subscribed > 0) { echo '<span style="color:green;font-size:22px"><b><i class="fa fa-check" aria-hidden="true"></i></b></span>';}
-						  else{ echo '<span style="color:red;font-size:22px""><b><i class="fa fa-remove" aria-hidden="true"></i></b></span>';}
-						  ?></td>
-								  <td>
-								  
-								  
-								  
 						  <td>
 						  <?php if(config('global.demosite')=="yes"){?>
 						  <a href="#" class="btn btn-success btndisable">Edit</a>  <span class="disabletxt">( <?php echo config('global.demotxt');?> )</span>
