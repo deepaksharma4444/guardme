@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
 class CreateNewsLettersTable extends Migration
 {
     /**
@@ -11,7 +13,6 @@ class CreateNewsLettersTable extends Migration
      */
     public function up()
     {
-		Schema::dropIfExists('news_letters');
         Schema::create('news_letters', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('email',300);
@@ -19,6 +20,7 @@ class CreateNewsLettersTable extends Migration
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
